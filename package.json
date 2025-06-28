@@ -1,0 +1,11 @@
+{
+  "name": "mentorconnect-monorepo",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"cd backend && uvicorn app.main:app --reload --port 8080\" \"cd frontend && npm run dev\"",
+    "format": "cd backend && black . && ruff . && cd ../frontend && prettier --write . && eslint . --fix"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
