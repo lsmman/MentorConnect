@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import MentorListPage from './pages/MentorListPage';
-import ProfilePage from './pages/ProfilePage';
-import MatchRequestPage from './pages/MatchRequestPage';
-import NotFound from './components/NotFound';
+import LoginPage from 'pages/LoginPage';
+import SignupPage from 'pages/SignupPage';
+import MentorListPage from 'pages/MentorListPage';
+import ProfilePage from 'pages/ProfilePage';
+import MatchRequestPage from 'pages/MatchRequestPage';
+import NotFound from 'components/NotFound';
 
 const AppRoutes = () => {
   const location = useLocation();

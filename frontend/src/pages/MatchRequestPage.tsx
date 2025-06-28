@@ -1,41 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import { getIncomingRequests, getOutgoingRequests, acceptRequest, rejectRequest, cancelRequest } from '../api/matchRequests';
+import {
+  getIncomingRequests,
+  getOutgoingRequests,
+  acceptRequest,
+  rejectRequest,
+  cancelRequest,
+} from '../api/matchRequests';
 import { MatchRequest } from '../types/matchRequest';
 
 const MatchRequestPage: React.FC = () => {
   const [incoming, setIncoming] = useState<MatchRequest[]>([]);
   const [outgoing, setOutgoing] = useState<MatchRequest[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const token = localStorage.getItem('token') || '';
 
   useEffect(() => {
-    getIncomingRequests()
+    getIncomingRequests(token)
       .then(setIncoming)
       .catch(() => setIncoming([]));
-    getOutgoingRequests()
+    getOutgoingRequests(token)
       .then(setOutgoing)
       .catch(() => setOutgoing([]));
   }, []);
 
   const handleAccept = async (id: number) => {
     try {
-      await acceptRequest(id);
-      setIncoming((prev) => prev.map((r) => (r.id === id ? { ...r, status: 'accepted' } : r)));
+      await acceptRequest(token, id);
+      setIncoming((prev) =>
+        prev.map((r) => (r.id === id ? { ...r, status: 'accepted' } : r)),
+      );
     } catch (e) {
       setError('수락 실패');
     }
   };
   const handleReject = async (id: number) => {
     try {
-      await rejectRequest(id);
-      setIncoming((prev) => prev.map((r) => (r.id === id ? { ...r, status: 'rejected' } : r)));
+      await rejectRequest(token, id);
+      setIncoming((prev) =>
+        prev.map((r) => (r.id === id ? { ...r, status: 'rejected' } : r)),
+      );
     } catch (e) {
       setError('거절 실패');
     }
   };
   const handleCancel = async (id: number) => {
     try {
-      await cancelRequest(id);
-      setOutgoing((prev) => prev.map((r) => (r.id === id ? { ...r, status: 'cancelled' } : r)));
+      await cancelRequest(token, id);
+      setOutgoing((prev) =>
+        prev.map((r) => (r.id === id ? { ...r, status: 'cancelled' } : r)),
+      );
     } catch (e) {
       setError('취소 실패');
     }
@@ -62,7 +75,9 @@ const MatchRequestPage: React.FC = () => {
         {outgoing.map((req) => (
           <li key={req.id}>
             {req.status}
-            {req.status === 'pending' && <button onClick={() => handleCancel(req.id)}>취소</button>}
+            {req.status === 'pending' && (
+              <button onClick={() => handleCancel(req.id)}>취소</button>
+            )}
           </li>
         ))}
       </ul>
