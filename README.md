@@ -1,9 +1,9 @@
 # MentorConnect
 
 # 멘토-멘티 매칭 앱 개발 요구사항
-(천하제일
-입코딩 대회)[https://lipcoding.kr/] 에서 해커톤을 통해 수행한 프로젝트입니다.
-관련 레포 : (링크)[https://github.com/lipcoding-kr/lipcoding-competition]
+[천하제일
+입코딩 대회](https://lipcoding.kr/) 에서 해커톤을 통해 수행한 프로젝트입니다.
+관련 레포 : [링크](https://github.com/lipcoding-kr/lipcoding-competition)
 
 ## 앱 개요
 
